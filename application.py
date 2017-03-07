@@ -8,7 +8,6 @@ Step-by-step tutorial: https://medium.com/@rodkey/deploying-a-flask-application-
 '''
 
 from flask import Flask, render_template, request
-<<<<<<< HEAD
 from application import googlemap
 from application import db
 from application.models import Data
@@ -17,17 +16,13 @@ from flask_googlemaps import Map
 from elasticsearch import Elasticsearch, RequestsHttpConnection
 import random
 import math
-=======
-from application import db
-from application.models import Data
-from application.forms import EnterDBInfo, RetrieveDBInfo
->>>>>>> 7c31d93d966bbb6df97ad5bd9cf789012ac098ab
+
+
 
 # Elastic Beanstalk initalization
 application = Flask(__name__)
 application.debug=True
 # change this to your own value
-<<<<<<< HEAD
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'  
 host='search-twittmap-6s3aqfikqujq7wozww3cq2pcyu.us-east-1.es.amazonaws.com'
 
@@ -42,11 +37,6 @@ es = Elasticsearch(
 
 
 @application.route('/test', methods=['GET', 'POST'])
-=======
-application.secret_key = 'cC1YCIWOj9GgWspgNEo2'   
-
-@application.route('/', methods=['GET', 'POST'])
->>>>>>> 7c31d93d966bbb6df97ad5bd9cf789012ac098ab
 @application.route('/index', methods=['GET', 'POST'])
 def index():
     form1 = EnterDBInfo(request.form) 
@@ -75,7 +65,6 @@ def index():
     
     return render_template('index.html', form1=form1, form2=form2)
 
-<<<<<<< HEAD
 
 @application.route('/')
 def map():
@@ -142,7 +131,5 @@ def map():
 
     return render_template('home.html', marker_list= locationst, count=number)
 
-=======
->>>>>>> 7c31d93d966bbb6df97ad5bd9cf789012ac098ab
 if __name__ == '__main__':
     application.run(host='0.0.0.0')

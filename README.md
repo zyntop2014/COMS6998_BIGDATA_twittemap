@@ -1,23 +1,29 @@
 # twittemap
 CloudComputingTwitt
-
+Team member: Yanan Zhang uni:yz3054 , Shuyang Zhao uni:sz2631
 1. open the virtual environment and install the software
 
 command: 
 
 source twitt2/bin/activate
-
 pip install -r requirements.txt
 
+2. Streaming Tweets
+Create an EC2 instance
+Pull the repo from Github
+command :
 
-2. run application locally
+python streaming.py’
 
+3.run application: search twists keyword through dropdown menu 
+
+command:
 python application.py
 
-3. deploy using EB  (not done yet)
+4. deploy using EB 
 
+command:
 eb init
 eb create
-
 eb open
 

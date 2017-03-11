@@ -1,29 +1,20 @@
 '''
 Simple Flask application to test deployment to Amazon Web Services
-Uses Elastic Beanstalk and RDS
+Uses Elastic Beanstalk 
 
-Author: Scott Rodkey - rodkeyscott@gmail.com
-
-Step-by-step tutorial: https://medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80
 '''
-
 from flask import Flask, render_template, request
-from application import googlemap
-from application import db
-from application.models import Data
-from application.forms import EnterDBInfo, RetrieveDBInfo
 from flask_googlemaps import Map
 from elasticsearch import Elasticsearch, RequestsHttpConnection
 import random
 import math
-
-
 
 # Elastic Beanstalk initalization
 application = Flask(__name__)
 application.debug=True
 # change this to your own value
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'  
+
 host='search-twittmap-6s3aqfikqujq7wozww3cq2pcyu.us-east-1.es.amazonaws.com'
 
 es = Elasticsearch(
@@ -31,42 +22,10 @@ es = Elasticsearch(
     use_ssl=True,
     verify_certs=True,
     connection_class=RequestsHttpConnection
-)
+) 
 
 
-
-
-@application.route('/test', methods=['GET', 'POST'])
-@application.route('/index', methods=['GET', 'POST'])
-def index():
-    form1 = EnterDBInfo(request.form) 
-    form2 = RetrieveDBInfo(request.form) 
-    
-    if request.method == 'POST' and form1.validate():
-        data_entered = Data(notes=form1.dbNotes.data)
-        try:     
-            db.session.add(data_entered)
-            db.session.commit()        
-            db.session.close()
-        except:
-            db.session.rollback()
-        return render_template('thanks.html', notes=form1.dbNotes.data)
-        
-    if request.method == 'POST' and form2.validate():
-        try:   
-            num_return = int(form2.numRetrieve.data)
-            query_db = Data.query.order_by(Data.id.desc()).limit(num_return)
-            for q in query_db:
-                print(q.notes)
-            db.session.close()
-        except:
-            db.session.rollback()
-        return render_template('results.html', results=query_db, num_return=num_return)                
-    
-    return render_template('index.html', form1=form1, form2=form2)
-
-
-@application.route('/')
+@application.route('/', methods=['POST'])
 def map():
     # creating a map in the view
     number =1000
@@ -80,26 +39,49 @@ def map():
 
     locations2 = [
         [42.503454, -92],
-        [39.499633, -88]
+        [39.499633, -88],
+        [45.81, 15.97]
+
+    ];
+
+    locations3=[ [15.97, 45.81], 
+               [83.92, 35.96], 
+                
+               [11.07, 49.45], 
+               (40.856362525282094, -97.39066408255889), 
+               [-90.89833333, 31.58694444]
+
+
+
+
     ];
 
     #tweet = es.get(index = 'twitter', doc_type = 'tweets', id = 1) 
+
+    dp_res = request.form['dropdown']
+    selected = dp_res
     
-    selected="sports"
+    #selected="sports"
+    print selected
     res = es.search(index="tweet", doc_type="tweetmap", q=selected)
     locationst=[]
 
         
     print("%d documents found" % res['hits']['total'])
+    print res[0]
     for doc in res['hits']['hits']:
             #print doc
         #print("%s) %s" % (doc['_id'], doc['_source']['text']))
         #print doc['_source']['coordinates']
 
         if doc['_source']['coordinates']:
-            locationst.append(doc['_source']['coordinates'])
-
-
+            print  ('has')
+            x= doc['_source']['coordinates']['coordinates']
+            y= doc['_source']['coordinates']
+            print x
+           
+          
+            locationst.append(x)
 
         # select a random coordinates    
         else:
@@ -113,23 +95,29 @@ def map():
          
             u = float(random.uniform(0.0,1.0))
             v = float(random.uniform(0.0,1.0))
-            print u, v
+            #print u, v
             w = r * math.sqrt(u)
             t = 2 * math.pi * v
-            print  w, t
+            #print  w, t
             x = w * math.cos(t) 
             y = w * math.sin(t)
-            print x, y
+            #print x, y
   
             xLat  = x + x0
             yLong = y + y0
             locationst.append((xLat, yLong))
+    
     print locationst        
             
-    
-    
 
     return render_template('home.html', marker_list= locationst, count=number)
+
+
+@application.route('/', methods=['GET','POST'])
+def home():
+
+    return render_template('home.html', count =1000, marker_list = [])
+
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0')

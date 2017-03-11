@@ -22,6 +22,8 @@ python application.py
 
 4. deploy using EB 
 
+http://map2.us-west-2.elasticbeanstalk.com/
+
 command:
 eb init
 eb create

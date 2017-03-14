@@ -63,7 +63,7 @@ def map():
         # select a random coordinates    
         else:
             
-            radius = 5113000.0                       #Choose your own radius
+            radius = 3113000.0                       #Choose your own radius
             radiusInDegrees=float(radius/111300)            
             r = radiusInDegrees
             

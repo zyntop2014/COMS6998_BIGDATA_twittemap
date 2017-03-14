@@ -61,10 +61,7 @@
   <script type="text/javascript" src="{{ url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
   <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"async defer></script>
-  <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgviOH3VaP0rQc5c5VxLSUBRm7obCmi9o
-        &libraries=visualization&callback=initMap">    
-  </script>
+  <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
   
   <script type="text/javascript">
     var keyword = null;
@@ -101,7 +98,7 @@
         }
       }
     };
-  function initMap() {
+ 
 
     var locations = {{marker_list|tojson}};
     var small_blue = 'https://storage.googleapis.com/support-kms-prod/SNP_2752125_en_v0'
@@ -136,20 +133,7 @@
 
         
       }
-
-
-    }
-
-
-      /* 
-   * Initilize the HeatMap
-   */
-  heatmap = new google.maps.visualization.HeatmapLayer({
-    data: [],
-    map: map,
-    radius: 18
-  });
-
+  
   
 /* 
  * Change the keyword of dropdown

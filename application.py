@@ -63,7 +63,7 @@ def map():
         # select a random coordinates    
         else:
             
-            radius = 3113000.0                       #Choose your own radius
+            radius = 1113000.0                       #Choose your own radius
             radiusInDegrees=float(radius/111300)            
             r = radiusInDegrees
             
@@ -90,13 +90,13 @@ def map():
     number = len(locationst)    
 
 
-    return render_template('home.html', marker_list= locationst, count=number, selected=selected)
+    return render_template('home1.html', marker_list= locationst, count=number, selected=selected)
 
 
 @application.route('/', methods=['GET','POST'])
 def home():
 
-    return render_template('home.html', marker_list = [], count='')
+    return render_template('home1.html', marker_list = [], count='')
 
 
 if __name__ == '__main__':

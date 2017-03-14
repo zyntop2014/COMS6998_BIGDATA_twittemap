@@ -17,3 +17,4 @@ awsebcli==3.9.1
 tweepy==3.5.0
 twitter==1.17.1
 flask_googlemaps==0.2.4
+elasticsearch==5.2.0

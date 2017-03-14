@@ -22,7 +22,7 @@ python application.py
 
 4. deploy using EB 
 
-http://couldtwittmap.us-west-2.elasticbeanstalk.com/
+http://map.us-west-2.elasticbeanstalk.com/
 
 command:
 eb init

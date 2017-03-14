@@ -1,14 +1,11 @@
+<html>
 
-<div id="header">
-<h1>TwittMap</h1>
-</div>
-<link rel="stylesheet" type="text/css" href="header-search.css">
 
-<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+<div id="header"></div>
+
 
 <div id="section">
-<h1>Tweeter Map, Total tweet {{count}} </h1>
-
+<h1>Tweeter Map, Total tweets on Elastic Search {{count}} </h1>
 <h2>Selected Keyword: {{selected}}</h2>
 <form method="POST"> 
 <p>Click on the red dots to see the tweets</p>
@@ -20,89 +17,70 @@
     <option value="Friday">Friday</option>
     <option value="Cloud">Cloud</option>
     <option value="Movie">Movie</option>
+    <option value="Panda">Panda</option>
+    <option value="God">God</option>
+    <option value="Trump">Trump</option>
+    <option value="Hilarious">Hilarious</option>
+
 </select>
 </form>
 <noscript><input type="submit" value="Submit"></noscript>
-<head>
 
+</dev>
+
+
+<head>
+  
+  <title>TwittMap</title>
+  
+  <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"async defer></script>
 </head>
 <body>
-     <style type="text/css">
-        
-        #map { height: 512px; width:512px;}
-    </style>
-
-    
-    <div id="map" style='width:45%; height:70%'></div>
-    <script type="text/javascript">
-       function initialize() {
-          var mapOptions = {
-             center: new google.maps.LatLng(-34.397, 150.644),
-             zoom: 1,
-             minZoom: 1
-          };
-          var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-          var allowedBounds = new google.maps.LatLngBounds(
-          new google.maps.LatLng(85, -180), // top left corner of map
-          new google.maps.LatLng(-85, 180)  // bottom right corner
-          );
-          var k = 5.0; 
-          var n = allowedBounds .getNorthEast().lat() - k;
-          var e = allowedBounds .getNorthEast().lng() - k;
-          var s = allowedBounds .getSouthWest().lat() + k;
-          var w = allowedBounds .getSouthWest().lng() + k;
-          var neNew = new google.maps.LatLng( n, e );
-          var swNew = new google.maps.LatLng( s, w );
-          boundsNew = new google.maps.LatLngBounds( swNew, neNew );
-          map .fitBounds(boundsNew);
-
-          var markers = {{marker_list |tojson}}
-          var i
-
-        for( i = 0; i < markers.length; i++ ) {
-          var position = new google.maps.LatLng(markers[i][0], markers[i][1]);
-          marker = new google.maps.Marker({
-              position: position,
-              map: map,
-          });
-       }
-     }
-
-       google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-
-    <script>
-      function initMap() {
-
-        var mapDiv = document.getElementById('map');
-        var UScenter = {lat: 40.461881, lng: -99.757229};
-        //var UScenter = {lat: 0.0, lng: 0.0};
-        var map = new google.maps.Map(mapDiv, {
-          center: UScenter,
-          zoom: 4
-        });
-
-
-        var markers = {{marker_list |tojson}}
-        var i
-
-        for( i = 0; i < markers.length; i++ ) {
-          var position = new google.maps.LatLng(markers[i][0], markers[i][1]);
-          marker = new google.maps.Marker({
-              position: position,
-              map: map,
-          });
-
-
-      }
-
-
-      }
-    </script>
-  
-
-    <script src="https://maps.googleapis.com/maps/api/js?callback=initialize"async defer></script>
-
-</body>
+  <div id="map" style="height: 500px; width: 1000px;">
 </div>
 
+
+
+
+<script type="text/javascript">
+function initMap() {
+
+    var locations = {{marker_list|tojson}};
+    var small_blue = 'https://storage.googleapis.com/support-kms-prod/SNP_2752125_en_v0'
+
+    var UScenter = {lat: 40.461881, lng: -99.757229};
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: UScenter,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+
+
+    var marker, i;
+    var infowindow = new google.maps.InfoWindow();
+
+    
+    for (i = 0; i < locations.length; i++) { 
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][0][0], locations[i][0][1]),
+        map: map,
+        icon: small_blue
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][1]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+
+        
+      }
+
+
+    }
+  </script>
+</body>
+</html>

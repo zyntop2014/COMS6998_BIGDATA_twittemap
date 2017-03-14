@@ -15,7 +15,7 @@ command :
 
 python streaming.py’
 
-3.run application: search twists keyword through dropdown menu 
+3.run application: search tweets keyword through dropdown menu 
 
 command:
 python application.py
@@ -33,5 +33,4 @@ eb open
 5. Assumptions
 
 Due to large amount of data that are lack of coordinates, we specify random coordinates to 
-those data. The random data is located within some radias of the US center. 
-
+Since those are random so sometimes the coordinates are not realistic.

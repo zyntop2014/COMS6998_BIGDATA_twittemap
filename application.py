@@ -28,36 +28,23 @@ es = Elasticsearch(
 @application.route('/', methods=['POST'])
 def map():
     # creating a map in the view
-
-    #tweet = es.get(index = 'twitter', doc_type = 'tweets', id = 1) 
-
     dp_res = request.form['dropdown']
     selected = dp_res
-    
-    #selected="sports"
     print selected
-
 
     res = es.search(index="tweet", doc_type="tweetmap", q=selected, size=2000)
     locationst=[]
-
-        
+   
     print("%d documents found" % res['hits']['total'])
 
     #print res['hits']
     for doc in res['hits']['hits']:
-            #print doc
+        #print doc
         #print("%s) %s" % (doc['_id'], doc['_source']['text']))
         #print doc['_source']['coordinates']
         text=doc['_source']['text']
         if doc['_source']['coordinates']:
-            
-         
             x= doc['_source']['coordinates']['coordinates']
-       
-           
-           
-          
             locationst.append([x, text])
 
         # select a random coordinates    
@@ -73,23 +60,20 @@ def map():
          
             u = float(random.uniform(0.0,1.0))
             v = float(random.uniform(0.0,1.0))
-            #print u, v
+          
             w = r * math.sqrt(u)
             t = 2 * math.pi * v
-            #print  w, t
+        
             x = w * math.cos(t) 
             y = w * math.sin(t)
-            #print x, y
-  
+    
             xLat  = x + x0
             yLong = y + y0
             point = (xLat, yLong)
             locationst.append([point, text])
     
-       
+    # number of tweets   
     number = len(locationst)    
-
-
     return render_template('home1.html', marker_list= locationst, count=number, selected=selected)
 
 

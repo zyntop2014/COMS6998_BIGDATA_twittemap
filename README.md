@@ -29,3 +29,9 @@ eb init
 eb create
 eb open
 
+
+5. Assumptions
+
+Due to large amount of data that are lack of coordinates, we specify random coordinates to 
+those data. The random data is located within some radias of the US center. 
+

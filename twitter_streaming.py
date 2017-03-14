@@ -6,6 +6,7 @@ except ImportError:
 
 from elasticsearch import Elasticsearch
 from elasticsearch import Elasticsearch, RequestsHttpConnection
+import time
 
 
 
@@ -19,10 +20,12 @@ CONSUMER_KEY = 'KMUioXv68EVY2hi4wsjbQhJ7n'
 CONSUMER_SECRET = 'euVksyfB0hmm0Xc92GPoq8bH8ZHhYD4SPhh0FpettqCSpGHefi'
 
 
+
 oauth = OAuth(ACCESS_TOKEN, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
 
 # Initiate the connection to Twitter Streaming API
 twitter_stream = TwitterStream(auth=oauth)
+
 
 #es = Elasticsearch(['https://search-twittermap-fxwenvc77wcna7ukzghc6lcudm.us-east-1.es.amazonaws.com:9200'])
 #es = Elasticsearch(host='search-twittermap-fxwenvc77wcna7ukzghc6lcudm.us-east-1.es.amazonaws.com')
@@ -40,6 +43,7 @@ es = Elasticsearch(
 print(es.info())
 
 
+
 # Get a sample of the public data following through Twitter
 iterator = twitter_stream.statuses.sample()
 
@@ -50,12 +54,14 @@ iterator = twitter_stream.statuses.sample()
 tweet_count = 1
 for tweet in iterator:
     
+    
     # Twitter Python Tool wraps the data returned by Twitter 
     # as a TwitterDictResponse object.
     # We convert it back to the JSON format to print/score
     #print json.dumps(tweet)  
    
     try:
+        
         if 'text' in tweet: # only messages contains 'text' field is a tweet
             #print tweet['id'] # This is the tweet's id
             #print tweet['created_at'] # when the tweet posted
@@ -78,11 +84,12 @@ for tweet in iterator:
         continue
 
     
+   
 
     # The command below will do pretty printing for JSON data, try it out
     #print json.dumps(tweet, indent=4)
     #es.index(index = 'twitter', doc_type = 'tweets', id = 'tweet_count' , body = tweet)
     
-    #if tweet_count > 1000:
-     #  break 
+    if tweet_count > 30000:
+       break 
 

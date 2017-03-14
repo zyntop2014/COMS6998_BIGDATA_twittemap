@@ -28,33 +28,6 @@ es = Elasticsearch(
 @application.route('/', methods=['POST'])
 def map():
     # creating a map in the view
-    number =1000
-    locations = [
-      [ -33.890542, 151.274856],
-      [ -33.923036, 151.259052],
-      [ -34.028249, 151.157507],
-      [ -33.80010128657071, 151.28747820854187],
-      [-33.950198, 151.259302]
-    ];
-
-    locations2 = [
-        [42.503454, -92],
-        [39.499633, -88],
-        [45.81, 15.97]
-
-    ];
-
-    locations3=[ [15.97, 45.81], 
-               [83.92, 35.96], 
-                
-               [11.07, 49.45], 
-               (40.856362525282094, -97.39066408255889), 
-               [-90.89833333, 31.58694444]
-
-
-
-
-    ];
 
     #tweet = es.get(index = 'twitter', doc_type = 'tweets', id = 1) 
 
@@ -63,29 +36,34 @@ def map():
     
     #selected="sports"
     print selected
-    res = es.search(index="tweet", doc_type="tweetmap", q=selected)
+
+
+    res = es.search(index="tweet", doc_type="tweetmap", q=selected, size=2000)
     locationst=[]
 
         
     print("%d documents found" % res['hits']['total'])
-    print res[0]
+
+    #print res['hits']
     for doc in res['hits']['hits']:
             #print doc
         #print("%s) %s" % (doc['_id'], doc['_source']['text']))
         #print doc['_source']['coordinates']
-
+        text=doc['_source']['text']
         if doc['_source']['coordinates']:
-            print  ('has')
+            
+         
             x= doc['_source']['coordinates']['coordinates']
-            y= doc['_source']['coordinates']
-            print x
+       
+           
            
           
-            locationst.append(x)
+            locationst.append([x, text])
 
         # select a random coordinates    
         else:
-            radius = 1113000.0                       #Choose your own radius
+            
+            radius = 2113000.0                       #Choose your own radius
             radiusInDegrees=float(radius/111300)            
             r = radiusInDegrees
             
@@ -105,18 +83,20 @@ def map():
   
             xLat  = x + x0
             yLong = y + y0
-            locationst.append((xLat, yLong))
+            point = (xLat, yLong)
+            locationst.append([point, text])
     
-    print locationst        
-            
+       
+    number = len(locationst)    
 
-    return render_template('home.html', marker_list= locationst, count=number)
+
+    return render_template('home1.html', marker_list= locationst, count=number, selected=selected)
 
 
 @application.route('/', methods=['GET','POST'])
 def home():
 
-    return render_template('home.html', count =1000, marker_list = [])
+    return render_template('home1.html', marker_list = [], count='')
 
 
 if __name__ == '__main__':

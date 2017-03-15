@@ -5,7 +5,7 @@ Team member: Yanan Zhang uni:yz3054 , Shuyang Zhao uni:sz2631
 
 command: 
 
-source twitt/bin/activate
+source tweet/bin/activate
 pip install -r requirements.txt
 
 2. Streaming Tweets

@@ -5,7 +5,11 @@ Team member: Yanan Zhang uni:yz3054 , Shuyang Zhao uni:sz2631
 
 command: 
 
+<<<<<<< HEAD
 source twitt/bin/activate
+=======
+source tweet/bin/activate
+>>>>>>> eb162de5c825199e1a068e4fce3f7a8a3dbaba63
 pip install -r requirements.txt
 
 2. Streaming Tweets
@@ -22,7 +26,11 @@ python application.py
 
 4. deploy using EB 
 
+<<<<<<< HEAD
 http://couldtwittmap.us-west-2.elasticbeanstalk.com/
+=======
+http://cloudmap.us-west-2.elasticbeanstalk.com/
+>>>>>>> eb162de5c825199e1a068e4fce3f7a8a3dbaba63
 
 command:
 eb init

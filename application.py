@@ -37,8 +37,6 @@ def map():
     selected = dp_res
     maxsize=int(dp_res2)
     print type(selected), dp_res2, maxsize
-    
-
         
     res = es.search(index="tweet", doc_type="tweetmap", q=selected, size=maxsize)
     locationst=[]

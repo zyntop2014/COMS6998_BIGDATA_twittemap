@@ -32,7 +32,7 @@ def map():
     selected = dp_res
     print selected
 
-    res = es.search(index="tweet", doc_type="tweetmap", q=selected, size=2000)
+    res = es.search(index="tweet", doc_type="tweetmap", q=selected, size=200)
     locationst=[]
    
     print("%d documents found" % res['hits']['total'])

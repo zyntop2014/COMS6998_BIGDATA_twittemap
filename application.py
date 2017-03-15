@@ -28,11 +28,17 @@ es = Elasticsearch(
 @application.route('/', methods=['POST'])
 def map():
     # creating a map in the view
-    dp_res = request.form['dropdown']
-    selected = dp_res
-    print selected
+    try:
+        dp_res = request.form['dropdown']
+        dp_res2=request.form['dropdown2']
+    except:
+        return render_template('home1.html', marker_list = [], count='')
 
-    res = es.search(index="tweet", doc_type="tweetmap", q=selected, size=2000)
+    selected = dp_res
+    maxsize=int(dp_res2)
+    print type(selected), dp_res2, maxsize
+        
+    res = es.search(index="tweet", doc_type="tweetmap", q=selected, size=maxsize)
     locationst=[]
    
     print("%d documents found" % res['hits']['total'])

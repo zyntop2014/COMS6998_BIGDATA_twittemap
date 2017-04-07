@@ -16,6 +16,7 @@ application.debug=True
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'  
 
 host='search-twittmap-6s3aqfikqujq7wozww3cq2pcyu.us-east-1.es.amazonaws.com'
+host='search-movie-vpmtwgvr57yoata6seazfnpyfe.us-west-2.es.amazonaws.com'
 
 es = Elasticsearch(
     hosts=[{'host': host, 'port': 443}],
@@ -38,7 +39,8 @@ def map():
     maxsize=int(dp_res2)
     print type(selected), dp_res2, maxsize
         
-    res = es.search(index="tweet", doc_type="tweetmap", q=selected, size=maxsize)
+    #res = es.search(index="tweet", doc_type="tweetmap", q=selected, size=maxsize)
+    res = es.search(index="twittertrend", doc_type="tweets", q=selected, size=maxsize)
     locationst=[]
    
     print("%d documents found" % res['hits']['total'])

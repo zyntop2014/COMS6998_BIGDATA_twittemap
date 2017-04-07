@@ -63,7 +63,9 @@ def map():
         #es.index(index="tweet", doc_type="tweetmap", body= tweet)
             # Send this tweet to front-end
     '''
+
     # creating a map in the view
+    '''
     try:
         dp_res = request.form['dropdown']
         dp_res2=request.form['dropdown2']
@@ -126,6 +128,7 @@ def map():
     # number of tweets   
     number = len(locationst)    
     #return render_template('home1.html', marker_list= locationst, count=number, selected=selected)
+    '''
     return render_template('home1.html', marker_list = [], count='')
 
 

@@ -38,7 +38,7 @@ es = Elasticsearch(
 @application.route('/', methods=['POST'])
 def map():
 
-    
+    '''
     # AWS sends JSON with text/plain
     try:
         js = json.loads(request.data)
@@ -62,7 +62,7 @@ def map():
         r = requests.post(postURL , json = tweet)
         #es.index(index="tweet", doc_type="tweetmap", body= tweet)
             # Send this tweet to front-end
-    
+    '''
     # creating a map in the view
     try:
         dp_res = request.form['dropdown']

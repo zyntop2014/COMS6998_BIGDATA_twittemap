@@ -15,7 +15,7 @@ application.debug=True
 # change this to your own value
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'  
 
-host='search-twittmap-6s3aqfikqujq7wozww3cq2pcyu.us-east-1.es.amazonaws.com'
+host='search-movie-vpmtwgvr57yoata6seazfnpyfe.us-west-2.es.amazonaws.com'
 
 es = Elasticsearch(
     hosts=[{'host': host, 'port': 443}],
@@ -28,6 +28,7 @@ es = Elasticsearch(
 @application.route('/', methods=['POST'])
 def map():
     # creating a map in the view
+    '''
     try:
         dp_res = request.form['dropdown']
         dp_res2=request.form['dropdown2']
@@ -79,7 +80,9 @@ def map():
             locationst.append([point, text])
     
     # number of tweets   
-    number = len(locationst)    
+    number = len(locationst) 
+
+    '''   
     return render_template('home1.html', marker_list= locationst, count=number, selected=selected)
 
 

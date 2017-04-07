@@ -90,11 +90,11 @@ def map():
         #print doc['_source']['coordinates']
         text=doc['_source']['text']
 
-        '''
+        
         if doc['_source']['coordinates']:
             x= doc['_source']['coordinates']['coordinates']
             locationst.append([x, text])
-        '''
+       
 
         if doc['_source']['location']:
             x= doc['_source']['location']

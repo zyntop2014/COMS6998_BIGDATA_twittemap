@@ -13,7 +13,7 @@ consumer_secret = 'X00DyyCwXOnUBM1VsJEibTqHjEeSVwrl0aVbBIaVo835TuvXeP'
 
 
 sqs = boto3.resource('sqs')
-queue = sqs.get_queue_by_name(QueueName='TwitterTrend')
+queue = sqs.get_queue_by_name(QueueName='twittertrend')
 print(queue.url)
 
 class MyStreamListener(tweepy.StreamListener):  

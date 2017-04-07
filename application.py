@@ -20,7 +20,8 @@ application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
 
 host='search-twittmap-6s3aqfikqujq7wozww3cq2pcyu.us-east-1.es.amazonaws.com'
 host="search-twitttrend-p3dwnc67tiu2brpgv3py5i4czq.us-west-2.es.amazonaws.com/"
-#host='search-movie-vpmtwgvr57yoata6seazfnpyfe.us-west-2.es.amazonaws.com'
+
+host='search-movie-vpmtwgvr57yoata6seazfnpyfe.us-west-2.es.amazonaws.com'
 
 es = Elasticsearch(
     hosts=[{'host': host, 'port': 443}],
@@ -37,7 +38,7 @@ es = Elasticsearch(
 @application.route('/', methods=['POST'])
 def map():
 
-  
+    '''
     # AWS sends JSON with text/plain
     try:
         js = json.loads(request.data)
@@ -59,9 +60,9 @@ def map():
             # postURL = 'http://localhost:9201/tweetmap/tweet'
         #postURL =  "https://search-twittmap-6s3aqfikqujq7wozww3cq2pcyu.us-east-1.es.amazonaws.com/"
         #r = requests.post(postURL , json = tweet)
-        es.index(index="tweet", doc_type="tweetmap", body= tweet)
+        #es.index(index="tweet", doc_type="tweetmap", body= tweet)
             # Send this tweet to front-end
-
+    '''
     # creating a map in the view
     try:
         dp_res = request.form['dropdown']

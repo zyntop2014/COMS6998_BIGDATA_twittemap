@@ -18,8 +18,8 @@ application.debug=True
 # change this to your own value
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'  
 
-host='search-twittmap-6s3aqfikqujq7wozww3cq2pcyu.us-east-1.es.amazonaws.com'
-host="search-twitttrend-p3dwnc67tiu2brpgv3py5i4czq.us-west-2.es.amazonaws.com/"
+#host='search-twittmap-6s3aqfikqujq7wozww3cq2pcyu.us-east-1.es.amazonaws.com'
+#host="search-twitttrend-p3dwnc67tiu2brpgv3py5i4czq.us-west-2.es.amazonaws.com/"
 
 host='search-movie-vpmtwgvr57yoata6seazfnpyfe.us-west-2.es.amazonaws.com'
 
@@ -58,8 +58,8 @@ def map():
         print (tweet)
             # Send this tweet to elastic search
             # postURL = 'http://localhost:9201/tweetmap/tweet'
-        #postURL =  "https://search-twittmap-6s3aqfikqujq7wozww3cq2pcyu.us-east-1.es.amazonaws.com/"
-        #r = requests.post(postURL , json = tweet)
+        postURL =  "search-movie-vpmtwgvr57yoata6seazfnpyfe.us-west-2.es.amazonaws.com/twittertrend/tweets"
+        r = requests.post(postURL , json = tweet)
         #es.index(index="tweet", doc_type="tweetmap", body= tweet)
             # Send this tweet to front-end
     

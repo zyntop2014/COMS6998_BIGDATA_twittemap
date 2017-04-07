@@ -16,7 +16,7 @@ print (queue)
 sns = boto3.resource('sns')
 #IMPORTANT: sns and aws region needs to be the same: here both are us-west-2 Oregon
 #topic = sns.Topic('arn:aws:sns:us-west-2:217770466492:TwitterSentiment') 
-topic=sns.Topic("arn:aws:sns:us-west-2:471077427295:test")
+topic=sns.Topic("arn:aws:sns:us-west-2:471077427295:twitttrend")
 
 
 def worker():

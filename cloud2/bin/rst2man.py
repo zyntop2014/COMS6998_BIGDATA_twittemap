@@ -1,4 +1,4 @@
-#!/home/yanan/Desktop/COMS6998CloudComputing/twittemap/cloud2/bin/python2
+#!/home/yanan/Desktop/COMS6998CloudComputing/twitteTrend2/cloud2/bin/python2
 
 # Author: 
 # Contact: grubert@users.sf.net

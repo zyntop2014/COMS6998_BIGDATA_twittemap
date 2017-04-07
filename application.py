@@ -4,10 +4,11 @@ Uses Elastic Beanstalk
 
 '''
 from flask import Flask, render_template, request
-from flask_googlemaps import Map
+
 from elasticsearch import Elasticsearch, RequestsHttpConnection
 import random
 import math
+import requests
 
 # Elastic Beanstalk initalization
 application = Flask(__name__)
@@ -25,6 +26,10 @@ es = Elasticsearch(
     connection_class=RequestsHttpConnection
 ) 
 
+#r = requests.get('http://twittertrend2-dev.us-west-2.elasticbeanstalk.com/')
+
+
+
 
 @application.route('/', methods=['POST'])
 def map():
@@ -36,6 +41,7 @@ def map():
         return render_template('home1.html', marker_list = [], count='')
 
     selected = dp_res
+    print request
     maxsize=int(dp_res2)
     print type(selected), dp_res2, maxsize
         

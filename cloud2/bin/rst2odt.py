@@ -1,4 +1,4 @@
-#!/home/yanan/Desktop/COMS6998CloudComputing/twittemap/cloud2/bin/python2
+#!/home/yanan/Desktop/COMS6998CloudComputing/twitteTrend2/cloud2/bin/python2
 
 # $Id: rst2odt.py 5839 2009-01-07 19:09:28Z dkuhlman $
 # Author: Dave Kuhlman <dkuhlman@rexx.com>

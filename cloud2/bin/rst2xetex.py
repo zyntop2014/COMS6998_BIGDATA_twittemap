@@ -1,4 +1,4 @@
-#!/home/yanan/Desktop/COMS6998CloudComputing/twittemap/cloud2/bin/python2
+#!/home/yanan/Desktop/COMS6998CloudComputing/twitteTrend2/cloud2/bin/python2
 
 # $Id: rst2xetex.py 7847 2015-03-17 17:30:47Z milde $
 # Author: Guenter Milde

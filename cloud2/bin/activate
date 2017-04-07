@@ -40,7 +40,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/yanan/Desktop/COMS6998CloudComputing/twittemap/cloud2"
+VIRTUAL_ENV="/home/yanan/Desktop/COMS6998CloudComputing/twitteTrend2/cloud2"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
